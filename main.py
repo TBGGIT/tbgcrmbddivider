@@ -114,7 +114,7 @@ def upload_file():
 
             df = pd.read_excel(filepath)
             total_rows = len(df)
-            chunks = [df.iloc[i:i + 50] for i in range(0, total_rows, 50)]
+            chunks = [df.iloc[i:i + 50] for i in range(0, total_rows, 30)]
 
             # Limpia archivos anteriores
             for f in os.listdir(app.config['UPLOAD_FOLDER']):
