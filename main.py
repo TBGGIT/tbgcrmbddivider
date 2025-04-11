@@ -7,12 +7,12 @@ app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = 'uploads'
 os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
 
-HTML_TEMPLATE = (
-    """<!doctype html>
+HTML_TEMPLATE = '''
+<!doctype html>
 <html>
 <head>
   <title>Dividir Excel - FOR Human Capital</title>
-  """ + STYLES + """
+  {{ style_block|safe }}
 </head>
 <body>
   <div class="container">
@@ -34,8 +34,7 @@ HTML_TEMPLATE = (
   </div>
 </body>
 </html>
-"""
-)
+'''
 
 STYLE_BLOCK = """
 <style>
@@ -115,7 +114,7 @@ def upload_file():
 
             df = pd.read_excel(filepath)
             total_rows = len(df)
-            chunks = [df.iloc[i:i + 50] for i in range(0, total_rows, 30)]
+            chunks = [df.iloc[i:i + 50] for i in range(0, total_rows, 50)]
 
             # Limpia archivos anteriores
             for f in os.listdir(app.config['UPLOAD_FOLDER']):
