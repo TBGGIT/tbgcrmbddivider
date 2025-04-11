@@ -7,12 +7,12 @@ app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = 'uploads'
 os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
 
-HTML_TEMPLATE = '''
-<!doctype html>
+HTML_TEMPLATE = (
+    """<!doctype html>
 <html>
 <head>
   <title>Dividir Excel - FOR Human Capital</title>
-  {{ style_block }}
+  """ + STYLES + """
 </head>
 <body>
   <div class="container">
@@ -34,7 +34,8 @@ HTML_TEMPLATE = '''
   </div>
 </body>
 </html>
-'''
+"""
+)
 
 STYLE_BLOCK = """
 <style>
